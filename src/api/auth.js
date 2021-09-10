@@ -16,9 +16,14 @@ const updateUser = (id, credentials) => {
   return axios.put('/users/' + id + '/', credentials)
 }
 
+const getUsers = () => {
+  return axios.get('/users')
+}
+
 export default {
   register,
   login,
   deleteUser,
-  updateUser
+  updateUser,
+  getUsers
 }

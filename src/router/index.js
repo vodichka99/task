@@ -5,6 +5,7 @@ import Login from "@/views/Login.vue";
 import UserPage from "@/views/UserPage.vue";
 import DeletePage from "@/views/DeletePage.vue";
 import EditAccount from "@/views/EditAccount.vue";
+import DataBase from "@/views/DataBase.vue";
 
 const routes = [
   {
@@ -36,6 +37,11 @@ const routes = [
     path: "/userpage/:id/edit",
     name: "edit",
     component: EditAccount
+  },
+  {
+    path: "/database",
+    name: "database",
+    component: DataBase
   },
 ];
 

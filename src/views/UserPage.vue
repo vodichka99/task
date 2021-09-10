@@ -9,10 +9,21 @@
         Email: {{ user.email }}
       </span>
       <div class="buttons">
-        <button class="waves-effect waves-light btn red delete-btn" @click="toDelete">
+        <button
+          class="waves-effect waves-light btn red delete-btn"
+          @click="toDelete"
+        >
           delete account
         </button>
-        <button class="waves-effect waves-light btn" @click="toEdit">edit account</button>
+        <button
+          class="waves-effect waves-light btn to-edit-btn"
+          @click="toEdit"
+        >
+          edit account
+        </button>
+        <button class="waves-effect waves-light btn" @click="toDataBase">
+          show database
+        </button>
       </div>
     </div>
   </div>
@@ -25,13 +36,16 @@ export default {
     };
   },
   methods: {
-    toDelete(){
-      this.$router.push({name: 'delete', params: {id: this.user.id}})
+    toDelete() {
+      this.$router.push({ name: "delete", params: { id: this.user.id } });
     },
-    toEdit(){
-      this.$router.push({name: 'edit', params: {id: this.user.id}})
+    toEdit() {
+      this.$router.push({ name: "edit", params: { id: this.user.id } });
+    },
+    toDataBase() {
+      this.$router.push({ name: "database" });
     }
-  }
+  },
 };
 </script>
 <style lang="scss">
@@ -44,6 +58,9 @@ export default {
     .buttons {
       margin-top: 30px;
       .delete-btn {
+        margin-right: 20px;
+      }
+      .to-edit-btn {
         margin-right: 20px;
       }
     }

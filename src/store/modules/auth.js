@@ -3,7 +3,9 @@ const state = {
   isSubmitting: false,
   errors: null,
   isLogged: false,
-  currentUser: null
+  currentUser: null,
+  usersDB: null,
+  isLoading: false
 }
 const mutations = {
   registerStart(state) {
@@ -56,6 +58,18 @@ const mutations = {
   },
   updateUserFailure(state, err) {
     state.isSubmitting = false
+    state.errors = err
+  },
+  getUsersStart(state) {
+    state.isLoading = true
+    state.errors = null
+  },
+  getUsersSuccess(state, credentials) {
+    state.isLoading = false
+    state.usersDB = credentials
+  },
+  getUsersFailure(state, err) {
+    state.isLoading = false
     state.errors = err
   },
 }
@@ -132,11 +146,34 @@ const actions = {
           context.commit('updateUserFailure', err)
         })
     })
+  },
+  getUsers(context){
+    return new Promise(resolve => {
+      authApi
+        .getUsers()
+        .then(response => {
+          context.commit('getUsersSuccess', response.data)
+          resolve(response)
+        })
+        .catch(err => {
+          alert('Error');
+          context.commit('getUsersFailure', err)
+        })
+    })
+  }
+}
+const getters = {
+  getUsers(state) {
+    return state.usersDB
+  },
+  getLoading(state) {
+    return state.isLoading
   }
 }
 
 export default {
   state,
   mutations,
-  actions
+  actions,
+  getters
 }
